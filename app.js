@@ -45,17 +45,18 @@ require('dotenv').config()
 const express = require('express');
 const app = express();
 require('express-async-errors');
-
+const authenticatUser = require('./middleware/authentication')
 
 //*connect to db
 const connectDB = require('./db/connect.js')
 
 //* router
 const authRouter = require('./routes/auth')
-
+const jobsRouter = require('./routes/jobs')
 app.use(express.json());
 
 app.use('/api/v1/auth',authRouter)
+app.use('/api/v1/jobs',authenticatUser,jobsRouter)
 
 const port = process.env.PORT || 5001;
 
