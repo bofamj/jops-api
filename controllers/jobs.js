@@ -111,13 +111,11 @@ const updateJob =async (req,res)=>{
 const job = await Job.indByIdAndUpdate({_id:jobId,createdBy:userId},req.body,{new:true,runValidators:true})
     res.status(StatusCodes.OK).json({job})
 }
-
 //*delete a job for a user
 
 const deleteJob =async (req,res)=>{
 const {user:{userId},
 params:{id:jobId},}=req
- 
 const job = await Job.findByIdAndRemove({_id:jobId,createdBy:userId})
     res.status(StatusCodes.OK).send('deleted')
 }
